@@ -1,0 +1,1112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="description" content="Kairos — turning banks' mandatory customer communications into a compliant engagement channel by personalizing delivery, not mandated content. DTAI Q5 Group 10 prototype." />
+<title>Kairos — The Alert That Already Works Twice As Hard</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,500;8..60,600;8..60,700&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --ink:#12181f;
+    --navy:#101b2d;
+    --navy-2:#182642;
+    --paper:#edefe9;
+    --paper-2:#e2e5dc;
+    --grey:#6b7280;
+    --grey-light:#98a09b;
+    --teal:#0e7f74;
+    --teal-deep:#0a5b53;
+    --teal-tint:#e2f1ee;
+    --line:#cfd3c8;
+    --line-dark:#2b3a55;
+    --white:#ffffff;
+
+    /* Solid Department Colors for Maximum Visibility */
+    --dept-mktg: #7e22ce; 
+    --dept-comp: #dc2626; 
+    --dept-it: #2563eb;   
+
+    --font-serif:'Source Serif 4', 'Iowan Old Style', 'Palatino Linotype', Palatino, Georgia, 'Times New Roman', serif;
+    --font-sans:'IBM Plex Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    --font-mono:'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', 'Courier New', monospace;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    *{animation-duration:0.001ms !important; transition-duration:0.001ms !important;}
+  }
+  body{
+    margin:0; background:var(--paper); color:var(--ink);
+    font-family:var(--font-sans); line-height:1.5; font-size:16px;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit;}
+  :focus-visible{outline:2px solid var(--teal-deep); outline-offset:2px;}
+  .wrap{max-width:1080px; margin:0 auto; padding:0 32px;}
+  @media (max-width:640px){ .wrap{padding:0 20px;} }
+
+  .sr-only{
+    position:absolute; width:1px; height:1px; padding:0; margin:-1px;
+    overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; border:0;
+  }
+  .skip-link{
+    position:absolute; left:-9999px; top:0; background:var(--ink); color:var(--paper);
+    padding:10px 16px; z-index:100; font-size:0.9rem; font-weight:600;
+  }
+  .skip-link:focus{left:0;}
+
+  /* NAV */
+  header.nav{
+    position:sticky; top:0; z-index:50;
+    background:rgba(237,239,233,0.92); backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav-row{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:18px 0; gap:16px; flex-wrap:wrap;
+  }
+  .brand{font-family:var(--font-serif); font-weight:600; font-size:1.25rem; letter-spacing:-0.01em;}
+  .brand span{color:var(--teal);}
+  .nav-links{display:flex; gap:24px; font-size:0.92rem; flex-wrap:wrap;}
+  .nav-links a{text-decoration:none; color:var(--grey); border-bottom:1px solid transparent; padding-bottom:2px;}
+  .nav-links a:hover{color:var(--ink); border-color:var(--teal);}
+  @media (max-width:760px){
+    .nav-row{padding:14px 0 12px;}
+    .nav-links{width:100%; gap:16px; font-size:0.82rem;}
+  }
+
+  /* HERO */
+  .hero{padding:72px 0 56px;}
+  .hero-grid{display:grid; grid-template-columns:1.05fr 1fr; gap:56px; align-items:center;}
+  @media (max-width:900px){ .hero-grid{grid-template-columns:1fr; gap:40px;} }
+  .kicker{font-size:0.95rem; color:var(--teal-deep); font-weight:600; margin:0 0 14px;}
+  h1{
+    font-family:var(--font-serif); font-weight:600; font-size:2.6rem; line-height:1.15;
+    margin:0 0 20px; letter-spacing:-0.01em; max-width:14ch;
+  }
+  @media (max-width:640px){ h1{font-size:2rem;} }
+  .lede{font-size:1.08rem; color:var(--ink); max-width:46ch; margin:0 0 28px;}
+  .lede b{color:var(--teal-deep);}
+  .cta-row{display:flex; gap:14px; align-items:center; flex-wrap:wrap;}
+  .btn{
+    font-family:var(--font-sans); font-weight:600; font-size:0.95rem;
+    padding:12px 20px; border-radius:3px; border:1px solid var(--ink);
+    background:var(--ink); color:var(--paper); cursor:pointer; text-decoration:none;
+    display:inline-block;
+  }
+  .btn.ghost{background:transparent; color:var(--ink); border:1px solid var(--line-dark);}
+  .btn:hover{opacity:0.85;}
+
+  /* toggle switch */
+  .mode-switch{
+    display:inline-flex; align-items:center; gap:0; border:1px solid var(--ink);
+    border-radius:3px; overflow:hidden; font-size:0.85rem; font-weight:600;
+  }
+  .mode-switch button{
+    padding:9px 16px; background:var(--paper); border:none; cursor:pointer;
+    color:var(--grey); font-family:var(--font-sans); font-weight:600; font-size:0.85rem;
+  }
+  .mode-switch button[aria-pressed="true"]{background:var(--ink); color:var(--paper);}
+  .mode-switch button[aria-pressed="true"].personalized{background:var(--teal-deep);}
+
+  /* Robust In-Flow Department Tags */
+  .dept-badge {
+    display: inline-block;
+    font-size: 0.65rem;
+    font-family: var(--font-mono);
+    font-weight: 600;
+    padding: 4px 8px;
+    border-radius: 4px;
+    color: #ffffff;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.15);
+  }
+  .dept-mktg { background: var(--dept-mktg); }
+  .dept-comp { background: var(--dept-comp); }
+  .dept-it { background: var(--dept-it); }
+  .badge-row {
+    text-align: right; 
+    margin-bottom: 12px;
+  }
+
+  /* DELIVERY STRIP */
+  .delivery{
+    max-width:420px; margin:0 auto 14px; border:1px solid var(--line);
+    background:var(--paper-2); padding:14px 16px 15px;
+  }
+  .delivery-label{
+    margin:0 0 12px; font-size:0.76rem; font-weight:600; color:var(--grey);
+    display:flex; justify-content:space-between; align-items:baseline; gap:10px;
+  }
+  .delivery-state{font-family:var(--font-mono); font-size:0.72rem; color:var(--grey);}
+  .delivery.is-personalized{background:var(--teal-tint); border-color:var(--teal-deep);}
+  .delivery.is-personalized .delivery-label{color:var(--teal-deep);}
+  .delivery.is-personalized .delivery-state{color:var(--teal-deep);}
+  .delivery-grid{display:grid; grid-template-columns:1fr 1fr; gap:12px 18px; margin:0;}
+  .delivery-grid > div{min-width:0;}
+  .delivery-grid dt{font-size:0.7rem; color:var(--grey); margin-bottom:2px;}
+  .delivery-grid dd{margin:0; font-size:0.83rem; font-weight:500; line-height:1.35;}
+  .delivery.is-personalized .delivery-grid dd{color:var(--teal-deep); font-weight:600;}
+
+  /* STATEMENT MOCKUP */
+  .statement-shell{
+    background:var(--white); border:1px solid var(--line);
+    box-shadow:0 18px 40px -22px rgba(16,27,45,0.35);
+    max-width:420px; margin:0 auto; font-size:0.86rem;
+  }
+  .statement-head{
+    padding:18px 20px 14px; border-bottom:1px solid var(--line);
+    display:flex; justify-content:space-between; align-items:flex-start;
+  }
+  .statement-bank{font-family:var(--font-serif); font-weight:600; font-size:1.05rem;}
+  .statement-meta{color:var(--grey); font-size:0.78rem; text-align:right; line-height:1.4;}
+
+  .dash{
+    padding:0; max-height:0; overflow:hidden; opacity:0;
+    transition:max-height 0.4s ease, opacity 0.3s ease, padding 0.3s ease;
+    background:var(--teal-tint); border-bottom:1px solid var(--line);
+  }
+  .dash.show{max-height:650px; opacity:1; padding:18px 20px 20px;}
+  .dash-label{font-size:0.75rem; color:var(--teal-deep); font-weight:600; margin:0 0 10px;}
+  .dash-top{display:flex; justify-content:space-between; align-items:baseline; margin-bottom:14px;}
+  .dash-amount{font-family:var(--font-mono); font-size:1.7rem; font-weight:600; color:var(--ink);}
+  .dash-amount-label{font-size:0.72rem; color:var(--grey);}
+  .dash-insight{
+    font-size:0.85rem; color:var(--ink); margin:0 0 14px; padding:10px 12px;
+    background:var(--white); border-left:2px solid var(--teal-deep);
+  }
+  .dash-offer{
+    display:flex; justify-content:space-between; align-items:center; gap:12px;
+    padding:12px 14px; background:var(--white); border:1px solid var(--teal-deep);
+  }
+  .dash-offer-text{font-size:0.82rem;}
+  .dash-offer-text b{display:block; font-size:0.88rem; margin-bottom:2px;}
+  .offer-id {font-family:var(--font-mono); font-size:0.65rem; color:var(--teal-deep); font-weight:400; background:var(--teal-tint); padding:2px 4px; border-radius:2px; margin-left:6px; vertical-align:middle;}
+  .dash-offer-text span{color:var(--grey); font-size:0.78rem;}
+  .dash-action{
+    font-family:var(--font-sans); font-weight:600; font-size:0.78rem;
+    background:var(--teal-deep); color:var(--white); border:none;
+    padding:9px 13px; white-space:nowrap; cursor:pointer;
+  }
+
+  /* compliance seam */
+  .mandated-note{
+    display:flex; align-items:center; gap:8px; margin:0;
+    padding:8px 0px; border-bottom:1px solid var(--line);
+    font-size:0.7rem; color:var(--grey); background:transparent;
+  }
+  .mandated-note .seam{
+    width:14px; height:1px; background:var(--grey); flex-shrink:0;
+  }
+  .statement-shell.is-personalized .mandated-note{
+    color:var(--teal-deep); border-left:2px solid var(--teal-deep); padding-left:20px;
+  }
+  .statement-shell.is-personalized .mandated-note .seam{background:var(--teal-deep);}
+
+  .statement-body{padding:16px 20px 20px;}
+  .plain-summary{
+    display:flex; justify-content:space-between; padding:10px 0; border-bottom:1px solid var(--line);
+    font-size:0.86rem; margin-bottom:10px;
+  }
+  .plain-summary div{display:flex; flex-direction:column;}
+  .plain-summary span:first-child{color:var(--grey); font-size:0.72rem;}
+  .plain-summary span:last-child{font-family:var(--font-mono); font-weight:600;}
+
+  table.txns{width:100%; border-collapse:collapse; font-size:0.8rem;}
+  table.txns caption{
+    caption-side:top; text-align:left; font-size:0.7rem; color:var(--grey); padding-bottom:6px;
+  }
+  table.txns th{
+    text-align:left; font-weight:600; color:var(--grey); font-size:0.68rem;
+    padding:6px 0; border-bottom:1px solid var(--line);
+  }
+  table.txns th:last-child, table.txns td:last-child{text-align:right;}
+  table.txns td{padding:8px 0; border-bottom:1px solid #eef0ea; font-family:var(--font-mono); vertical-align:top;}
+  table.txns td.desc{font-family:var(--font-sans);}
+  table.txns tr.flagged td{background:var(--teal-tint);}
+  table.txns tr.flagged td.desc{color:var(--teal-deep); font-weight:600; font-family:var(--font-sans);}
+  .flag-note{
+    display:block; font-weight:400; font-size:0.68rem; color:var(--teal-deep);
+    margin-top:2px; line-height:1.3;
+  }
+  .txn-total td{
+    border-bottom:none; border-top:1px solid var(--line); font-weight:600; padding-top:9px;
+  }
+  .txn-total td.desc{color:var(--grey); font-weight:600;}
+
+  /* PERSONA PICKER */
+  .persona-row{display:flex; gap:10px; flex-wrap:wrap; margin:22px 0 30px;}
+  .persona-btn{
+    font-family:var(--font-sans); font-size:0.85rem; padding:9px 14px;
+    border:1px solid var(--line-dark); background:transparent; color:var(--grey);
+    cursor:pointer; border-radius:3px; text-align:left;
+  }
+  .persona-btn[aria-pressed="true"]{background:var(--ink); color:var(--paper); border-color:var(--ink);}
+
+  /* SECTIONS */
+  section{padding:64px 0;}
+  .section-label{
+    font-size:0.85rem; color:var(--teal-deep); font-weight:600; margin:0 0 10px;
+  }
+  h2{
+    font-family:var(--font-serif); font-size:1.9rem; font-weight:600; margin:0 0 16px;
+    max-width:20ch; letter-spacing:-0.01em;
+  }
+  .section-copy{max-width:60ch; color:var(--grey); font-size:1.02rem;}
+  .footnote{font-size:0.78rem; color:var(--grey); margin-top:26px;}
+
+  /* PROBLEM */
+  .problem{background:var(--navy); color:var(--paper);}
+  .problem h2{color:var(--white);}
+  .problem .section-label{color:#8fd3c8;}
+  .problem .section-copy{color:#b7bfcd; max-width:64ch;}
+  .problem .footnote{color:#8f97ab;}
+  .stat-row{display:grid; grid-template-columns:repeat(3,1fr); gap:32px; margin-top:40px;}
+  @media (max-width:760px){ .stat-row{grid-template-columns:1fr; gap:28px;} }
+  .stat{border-top:1px solid var(--line-dark); padding-top:14px;}
+  .stat-num{font-family:var(--font-serif); font-size:2.1rem; color:var(--white); font-weight:600;}
+  .stat-label{color:#9aa2b5; font-size:0.88rem; margin-top:4px;}
+
+  /* DEMO layout */
+  .demo-grid{display:grid; grid-template-columns:0.95fr 1fr; gap:48px; align-items:start; margin-top:36px;}
+  @media (max-width:900px){ .demo-grid{grid-template-columns:1fr;} }
+  .demo-copy-block{position:sticky; top:110px;}
+  @media (max-width:900px){ .demo-copy-block{position:static;} }
+  .switch-label{font-size:0.78rem; color:var(--grey); margin:0 0 8px;}
+
+  /* OPERATING MODEL */
+  .opmodel{background:var(--paper); border-top:1px solid var(--line);}
+  .op-table{
+    width:100%; border-collapse:collapse; margin-top:34px; font-size:0.92rem; text-align:left;
+  }
+  .op-table th, .op-table td{
+    padding:16px 18px; border-bottom:1px solid var(--line); vertical-align:top;
+  }
+  .op-table thead th{
+    font-size:0.76rem; color:var(--grey); font-weight:600; padding-bottom:10px;
+    border-bottom:1px solid var(--line-dark);
+  }
+  .op-table thead th.col-after{color:var(--teal-deep);}
+  .op-table tbody th{
+    font-weight:600; width:22%; color:var(--ink); font-size:0.9rem;
+  }
+  .op-table td{color:var(--grey); width:39%;}
+  .op-table td.col-after{
+    color:var(--ink); background:var(--teal-tint); border-left:2px solid var(--teal-deep);
+  }
+  @media (max-width:760px){
+    .op-table, .op-table tbody, .op-table tr, .op-table th, .op-table td{display:block; width:auto;}
+    .op-table thead{display:none;}
+    .op-table tr{border-bottom:1px solid var(--line-dark); padding:6px 0 14px;}
+    .op-table tbody th{width:auto; padding:14px 0 6px; font-size:1rem;}
+    .op-table td{padding:8px 0 8px 12px; border-bottom:none;}
+    .op-table td::before{
+      content:attr(data-label); display:block; font-size:0.7rem; color:var(--grey);
+      font-weight:600; margin-bottom:3px;
+    }
+    .op-table td.col-after{padding-left:12px; background:transparent; border-left:2px solid var(--teal-deep);}
+    .op-table td.col-after::before{color:var(--teal-deep);}
+  }
+
+  /* JOURNEY DEMO */
+  .journey{background:var(--paper-2); border-top:1px solid var(--line); border-bottom:1px solid var(--line);}
+  .journey-tag{
+    display:inline-block; font-size:0.72rem; font-weight:600; color:var(--teal-deep);
+    border:1px solid var(--teal-deep); padding:3px 9px; border-radius:2px; margin-bottom:14px;
+  }
+  .crm-panel{
+    background:var(--white); border:1px solid var(--line); margin-top:32px;
+    max-width:760px;
+  }
+  .crm-head{
+    padding:14px 20px; border-bottom:1px solid var(--line); display:flex;
+    justify-content:space-between; align-items:center; gap:12px; flex-wrap:wrap;
+  }
+  .crm-head b{font-size:0.92rem;}
+  .crm-head span{font-size:0.76rem; color:var(--grey); font-family:var(--font-mono);}
+  .journey-cards{display:grid; grid-template-columns:repeat(3,1fr); gap:0;}
+  @media (max-width:760px){ .journey-cards{grid-template-columns:1fr;} }
+  .jcard{
+    padding:18px; border:none; border-right:1px solid var(--line); cursor:pointer;
+    background:var(--white); text-align:left; font-family:var(--font-sans);
+    font-size:1rem; color:var(--ink); width:100%;
+    display:flex; flex-direction:column; align-items:stretch; justify-content:flex-start;
+  }
+  .jcard:last-child{border-right:none;}
+  @media (max-width:760px){ .jcard{border-right:none; border-bottom:1px solid var(--line);} }
+  .jcard:hover{background:var(--teal-tint);}
+  .jcard[aria-pressed="true"]{background:var(--teal-tint); box-shadow:inset 0 0 0 1.5px var(--teal-deep);}
+  .jcard.dismissed{opacity:0.5;}
+  .jcard.dismissed:hover{opacity:0.75;}
+  .jcard-title{display:block; font-weight:600; font-size:0.9rem; margin-bottom:10px;}
+  .jstep{
+    display:flex; align-items:flex-start; gap:8px; font-size:0.76rem; color:var(--grey);
+    padding:4px 0; text-align:left;
+  }
+  .jstep .dot{width:6px; height:6px; border-radius:50%; background:var(--line-dark); flex-shrink:0; margin-top:6px;}
+  .jcard[aria-pressed="true"] .jstep .dot{background:var(--teal-deep);}
+  .jcard-status{
+    display:block; margin-top:auto; padding-top:12px; font-size:0.72rem; font-weight:600; letter-spacing:0.01em;
+  }
+  .jcard-status.picked{color:var(--teal-deep);}
+  .jcard-status.approved{color:var(--teal-deep);}
+  .jcard-status.dismissed{color:var(--grey);}
+
+  /* JOURNEY EDITOR */
+  .jeditor{border-top:1px solid var(--line-dark); background:var(--teal-tint); padding:18px 20px 20px;}
+  .jed-head{
+    display:flex; justify-content:space-between; align-items:flex-end; gap:16px;
+    flex-wrap:wrap; margin-bottom:14px;
+  }
+  .jed-label{margin:0 0 3px; font-size:0.72rem; font-weight:600; color:var(--teal-deep);}
+  .jed-title{font-family:var(--font-serif); font-size:1.15rem; font-weight:600;}
+  .jed-actions{display:flex; gap:8px; flex-wrap:wrap;}
+  .btn-sm{
+    font-family:var(--font-sans); font-size:0.78rem; font-weight:600; padding:8px 12px;
+    border:1px solid var(--line-dark); background:var(--white); color:var(--ink);
+    cursor:pointer; border-radius:2px;
+  }
+  .btn-sm:hover{background:var(--paper);}
+  .btn-sm.primary{background:var(--teal-deep); border-color:var(--teal-deep); color:var(--white);}
+  .btn-sm.primary:hover{background:var(--teal);}
+  .jed-steps{list-style:none; margin:0; padding:0; background:var(--white); border:1px solid var(--line);}
+  .jed-step{
+    display:flex; align-items:center; gap:10px; padding:8px 12px;
+    border-bottom:1px solid var(--line);
+  }
+  .jed-step:last-child{border-bottom:none;}
+  .jed-num{font-family:var(--font-mono); font-size:0.74rem; color:var(--grey); flex-shrink:0; width:20px;}
+  .jed-input{
+    flex:1; min-width:0; font-family:var(--font-sans); font-size:0.84rem; color:var(--ink);
+    border:1px solid transparent; background:transparent; padding:6px 8px; border-radius:2px;
+  }
+  .jed-input:hover{border-color:var(--line);}
+  .jed-input:focus{border-color:var(--teal-deep); background:var(--white); outline:none;}
+  .jed-ctrls{display:flex; gap:2px; flex-shrink:0;}
+  .jed-ctrls button{
+    width:26px; height:26px; border:1px solid transparent; background:transparent;
+    color:var(--grey); cursor:pointer; font-size:0.85rem; line-height:1; border-radius:2px;
+    font-family:var(--font-sans);
+  }
+  .jed-ctrls button:hover:not(:disabled){border-color:var(--line-dark); color:var(--ink);}
+  .jed-ctrls button:disabled{opacity:0.3; cursor:not-allowed;}
+  .jed-hint{margin:12px 0 0; font-size:0.76rem; color:var(--teal-deep);}
+  .crm-footer{
+    padding:14px 20px; border-top:1px solid var(--line); font-size:0.82rem; color:var(--grey); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;
+  }
+  .crm-footer b{color:var(--ink);}
+
+  /* ROADMAP */
+  .roadmap-list{margin-top:36px; border-top:1px solid var(--line);}
+  .rm-item{
+    display:grid; grid-template-columns:70px 1fr; gap:24px; padding:26px 0; border-bottom:1px solid var(--line);
+  }
+  @media (max-width:640px){ .rm-item{grid-template-columns:44px 1fr; gap:16px;} }
+  .rm-num{font-family:var(--font-mono); font-size:0.85rem; color:var(--grey);}
+  .rm-title{font-weight:600; font-size:1.05rem; margin-bottom:6px;}
+  .rm-desc{color:var(--grey); font-size:0.94rem; max-width:60ch;}
+  .rm-badge{
+    display:inline-block; font-size:0.7rem; font-weight:600; margin-left:10px;
+    padding:2px 8px; border:1px solid var(--line-dark); border-radius:2px; color:var(--grey); vertical-align:middle;
+  }
+
+  footer{padding:36px 0 48px; border-top:1px solid var(--line);}
+  .foot-row{display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;}
+  .foot-row span{font-size:0.82rem; color:var(--grey);}
+  .foot-note{margin-top:14px; font-size:0.76rem; color:var(--grey-light);}
+</style>
+</head>
+<body>
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="nav">
+  <div class="wrap nav-row">
+    <div class="brand">Kairos<span>.</span></div>
+    <nav class="nav-links" aria-label="Section navigation">
+      <a href="#problem">The Problem</a>
+      <a href="#demo">Statement Demo</a>
+      <a href="#operating-model">Operating Model</a>
+      <a href="#journey">Journey Assist</a>
+      <a href="#roadmap">Roadmap</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main" tabindex="-1">
+
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <p class="kicker">Digital Transformation with AI — Strategy &amp; Marketing</p>
+      <h1>The alert your customer already opens. Now it works for you too.</h1>
+      <p class="lede">Every bank sends communications customers are <b>compelled</b> to open — EMI reminders, card bills, KYC alerts. Kairos personalizes how that moment is <b>delivered</b> — tone, channel, timing, format — while the mandated content underneath stays exactly as filed.</p>
+      <div class="cta-row">
+        <a href="#demo" class="btn">See it personalize</a>
+        <a href="#problem" class="btn ghost">Why this matters</a>
+      </div>
+    </div>
+    <div>
+      <p class="switch-label" id="hero-switch-label">Aditi, 28 — new cardholder</p>
+      <div class="mode-switch" style="margin-bottom:16px;" id="hero-switch" role="group" aria-labelledby="hero-switch-label">
+        <button type="button" data-mode="generic" aria-pressed="true">Generic</button>
+        <button type="button" data-mode="personalized" class="personalized" aria-pressed="false">Personalized</button>
+      </div>
+      <div id="hero-delivery"></div>
+      <div id="statement-root"></div>
+      <p class="sr-only" role="status" id="hero-status"></p>
+    </div>
+  </div>
+</section>
+
+<section class="problem" id="problem">
+  <div class="wrap">
+    <p class="section-label">The Problem</p>
+    <h2>A guaranteed-attention channel, treated like paperwork.</h2>
+    <p class="section-copy">Banks spend heavily on paid media to buy attention they already have for free. Mandatory communications get opened out of necessity — but arrive generic, static, and disconnected from any engagement strategy. Closing that gap is an operating-model question, not a template question: it changes who owns the send, and which line of the P&amp;L it lands on.</p>
+    <div class="stat-row">
+      <div class="stat">
+        <div class="stat-num">~100%</div>
+        <div class="stat-label">forced open rate on due-amount alerts, vs. low engagement on marketing email</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">₹0</div>
+        <div class="stat-label">incremental acquisition cost — the touchpoint already exists in every cycle</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">2 layers</div>
+        <div class="stat-label">mandated content stays untouched; personalization wraps around it</div>
+      </div>
+    </div>
+    <p class="footnote">Figures are illustrative, used to frame the prototype narrative rather than as sourced benchmarks.</p>
+  </div>
+</section>
+
+<section id="demo">
+  <div class="wrap">
+    <p class="section-label">Demo — Statement &amp; Bill Personalization</p>
+    <h2>Same statement. Same data. A different first ten seconds.</h2>
+    <div class="demo-grid">
+      <div class="demo-copy-block">
+        <p class="section-copy">Pick a customer. Every figure in the statement below is identical across all views for that product line. Notice how the AI toggle reveals the <b>X-Ray Ownership Tags</b>. This proves how Kairos connects departments that rarely collaborate: <b>IT</b> powers the fast delivery engine, <b>Compliance</b> hardcodes the legal numbers and catalog rules, and <b>Marketing</b> optimizes the envelope to drive revenue.</p>
+        <div class="persona-row" id="persona-row" role="group" aria-label="Choose a customer"></div>
+        <p class="switch-label" id="demo-switch-label">View</p>
+        <div class="mode-switch" id="demo-switch" role="group" aria-labelledby="demo-switch-label">
+          <button type="button" data-mode="generic" aria-pressed="true">Generic View</button>
+          <button type="button" data-mode="personalized" class="personalized" aria-pressed="false">Kairos AI (X-Ray View)</button>
+        </div>
+      </div>
+      <div>
+        <div id="demo-delivery"></div>
+        <div id="statement-root-2"></div>
+        <p class="sr-only" role="status" id="demo-status"></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="opmodel" id="operating-model">
+  <div class="wrap">
+    <p class="section-label">Operating Model & Safeguards</p>
+    <h2>Who owns this channel, and how risks are mitigated.</h2>
+    <p class="section-copy">Personalizing the envelope is the visible part. What makes this a digital transformation rather than a product feature is where the channel sits afterwards: who owns the send, how risks (hallucination, consent, cost) are managed, and how success is measured.</p>
+    <table class="op-table">
+      <thead>
+        <tr>
+          <th scope="col"><span class="sr-only">Dimension</span></th>
+          <th scope="col">Today</th>
+          <th scope="col" class="col-after">With Kairos</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row">Who owns the send</th>
+          <td data-label="Today">Compliance and Operations. Marketing has no route into the message.</td>
+          <td data-label="With Kairos" class="col-after">Joint. Compliance owns the mandated fields and keeps a veto; Marketing owns the envelope around them.</td>
+        </tr>
+        <tr>
+          <th scope="row">Risk posture & Hallucinations</th>
+          <td data-label="Today">Risk avoided by never touching the message; 100% manual template coding.</td>
+          <td data-label="With Kairos" class="col-after">Risk managed: The AI matches users to hardcoded, vetted offers from a Product Catalog. It does not write financial terms.</td>
+        </tr>
+        <tr>
+          <th scope="row">Consent Validation SLA</th>
+          <td data-label="Today">Manual list scrubbing or reliance on downstream telecom providers.</td>
+          <td data-label="With Kairos" class="col-after">&lt; 50ms via IT in-memory cache; automatically defaults to a generic service-only template on timeout to guarantee core delivery.</td>
+        </tr>
+        <tr>
+          <th scope="row">Message Routing</th>
+          <td data-label="Today">All communications queue through a single monolithic transactional gateway.</td>
+          <td data-label="With Kairos" class="col-after">Synchronous alerts (OTPs) bypass AI completely; only asynchronous batch alerts (statements) route through the AI envelope layer.</td>
+        </tr>
+        <tr>
+          <th scope="row">Cost of Inference (ROI)</th>
+          <td data-label="Today">Fixed SaaS license cost based purely on send volume.</td>
+          <td data-label="With Kairos" class="col-after">Tiered inference: Real-time LLM for high-value segments, while lower tiers receive cached, pre-generated batch templates to ensure API costs never exceed revenue uplift.</td>
+        </tr>
+        <tr>
+          <th scope="row">Attribution & Learning</th>
+          <td data-label="Today">Sent, delivered, no complaint raised. No feedback loop.</td>
+          <td data-label="With Kairos" class="col-after">Closed-loop learning tracks channel/timing misses to adjust next cycle. Conversions tracked via Kairos-specific UTMs/promo codes to isolate exact revenue uplift.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section class="journey" id="journey">
+  <div class="wrap">
+    <span class="journey-tag">Phase 2 preview — small-scale demo</span>
+    <p class="section-label">Journey Orchestration Assist</p>
+    <h2>The marketer still decides. AI just stops starting from a blank canvas.</h2>
+    <p class="section-copy">Instead of a business user building customer journeys from scratch in the CRM, AI proposes two or three ready-made journeys from existing customer data. The human picks one, edits the steps, approves it, or throws it away — judgment stays human, the blank page doesn't. Try it: select a journey, then reorder, reword, or remove a step.</p>
+    <div class="crm-panel">
+      <div class="crm-head">
+        <b>AI-Suggested Journeys</b>
+        <span>segment: revolving credit users</span>
+      </div>
+      <div class="journey-cards" id="journey-cards" role="group" aria-label="AI-suggested journeys"></div>
+      <div class="jeditor" id="journey-editor" hidden></div>
+      <div class="crm-footer" id="journey-footer">
+        <span>Select a journey above to review and edit it the way a marketer would.</span>
+      </div>
+      <p class="sr-only" role="status" id="journey-status"></p>
+    </div>
+  </div>
+</section>
+
+<section class="roadmap" id="roadmap">
+  <div class="wrap">
+    <p class="section-label">Roadmap</p>
+    <h2>Where this starts, and where it goes.</h2>
+    <div class="roadmap-list">
+      <div class="rm-item">
+        <div class="rm-num">01</div>
+        <div>
+          <div class="rm-title">Statement &amp; bill personalization pilot<span class="rm-badge">this demo</span></div>
+          <div class="rm-desc">Launch on one card portfolio and one channel. Pareto dashboard, insight, and one cross-sell action layered on the existing statement — no change to mandated content. Stand up the content contract with Compliance and the attribution needed to measure the channel at all.</div>
+        </div>
+      </div>
+      <div class="rm-item">
+        <div class="rm-num">02</div>
+        <div>
+          <div class="rm-title">Expand alerts + journey orchestration assist</div>
+          <div class="rm-desc">Extend personalization to EMI reminders, KYC alerts, and renewal notices, and introduce AI-suggested journeys into the CRM for marketers to select and refine. Ownership of the envelope moves to a joint Marketing–Compliance model, with sub-50ms IT consent checks in the send path.</div>
+        </div>
+      </div>
+      <div class="rm-item">
+        <div class="rm-num">03</div>
+        <div>
+          <div class="rm-title">Tiered Inference & Feedback Loop</div>
+          <div class="rm-desc">Implement the closed-loop Engagement Optimization engine. If a customer ignores a push notification, the AI learns to shift the delivery time or channel for their next billing cycle. Transition to Tiered Inference (caching templates for lower-value segments) to aggressively protect API cost margins.</div>
+        </div>
+      </div>
+      <div class="rm-item">
+        <div class="rm-num">04</div>
+        <div>
+          <div class="rm-title">Full attribution &amp; channel reclassification</div>
+          <div class="rm-desc">Introduce Kairos-exclusive UTM parameters and promo codes to definitively measure cross-sell conversion and trust impact end-to-end. Mandatory communications move off the compliance cost line and onto an attributed revenue channel carrying its own P&amp;L — the point at which this stops being a feature and becomes an operating-model change.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-row">
+      <span>Kairos — prepared for Digital Transformation with AI, Q5 Group 10.</span>
+      <span>Domain: Strategy &amp; Marketing</span>
+    </div>
+    <p class="foot-note">Northbridge Bank is a fictional institution. All customers, transactions, and figures shown are invented for this prototype.</p>
+  </div>
+</footer>
+
+<script>
+  /* ------------------------------------------------------------------ *
+   * Data & Transactions
+   * ------------------------------------------------------------------ */
+
+  const ccTxns = [
+    {d:'02 Sep', desc:'Belgian Waffle Co.',      amt:4200, type:'debit'},
+    {d:'04 Sep', desc:'Singapore Airlines',      amt:31000, type:'debit'},
+    {d:'06 Sep', desc:'Kopi & Co., Singapore',   amt:2310, type:'debit'},
+    {d:'09 Sep', desc:'Green Leaf Utilities',    amt:2140, type:'debit'},
+    {d:'11 Sep', desc:'City Grocers',            amt:3860, type:'debit'},
+    {d:'12 Sep', desc:'Streamline Media',        amt:499, type:'debit'},
+    {d:'13 Sep', desc:'Aurora Home Studio',      amt:18900, type:'debit'}
+  ];
+
+  const savingsTxns = [
+    {d:'01 Sep', desc:'Salary Credit - TechCorp', amt:85000, type:'credit'},
+    {d:'02 Sep', desc:'Rent Transfer - UPI',      amt:22000, type:'debit'},
+    {d:'05 Sep', desc:'Amazon Pay India',         amt:1450, type:'debit'},
+    {d:'10 Sep', desc:'Mutual Fund SIP',          amt:15000, type:'debit'},
+    {d:'12 Sep', desc:'Swiggy UPI',               amt:640, type:'debit'},
+    {d:'14 Sep', desc:'Interest Paid',            amt:320, type:'credit'}
+  ];
+
+  function inr(n){
+    const s = String(Math.round(n));
+    if (s.length <= 3) return s;
+    const last3 = s.slice(-3);
+    const rest = s.slice(0, -3).replace(/\B(?=(\d{2})+(?!\d))/g, ',');
+    return rest + ',' + last3;
+  }
+
+  const TOTAL_DUE = ccTxns.reduce((sum, t) => sum + t.amt, 0); 
+  const MIN_DUE   = Math.round(TOTAL_DUE * 0.05);                
+  const DUE_DATE  = '14 Sep';
+
+  const SAVINGS_BAL = 142500;
+  const TOTAL_CREDITS = savingsTxns.filter(t => t.type === 'credit').reduce((sum, t) => sum + t.amt, 0);
+  const TOTAL_DEBITS = savingsTxns.filter(t => t.type === 'debit').reduce((sum, t) => sum + t.amt, 0);
+
+  const genericDelivery = {
+    tone:'Standard template',
+    channel:'Email, single blast',
+    timing:'Batch, 09:00',
+    format:'PDF attachment'
+  };
+
+  const personas = [
+    {
+      id:'aditi', name:'Aditi, 28', tag:'Credit Card • New User', productType: 'credit_card',
+      insight:'One purchase — ₹18,900 at Aurora Home Studio — is 30% of this bill, in your third cycle on the card.',
+      flaggedTxns:['Aurora Home Studio'],
+      flagNote:'Largest single line this cycle.',
+      offerId:'CATALOG-402',
+      offerTitle:'Convert ₹18,900 to EMI',
+      offerDesc:'Split this one purchase into 3 instalments at 12% p.a.',
+      offerAction:'Convert to EMI',
+      delivery:{
+        tone:'Plain, reassuring',
+        channel:'WhatsApp, email follow-up',
+        timing:'20:15 — usual open time',
+        format:'Mobile card, one tap'
+      }
+    },
+    {
+      id:'rohan', name:'Rohan, 45', tag:'Credit Card • Travel', productType: 'credit_card',
+      insight:'₹33,310 of this cycle was international spend. You paid roughly ₹1,166 in forex markup on it.',
+      flaggedTxns:['Singapore Airlines','Kopi & Co., Singapore'],
+      flagNote:'International — carries a 3.5% forex markup.',
+      offerId:'CATALOG-TRV-8',
+      offerTitle:'Activate zero forex markup',
+      offerDesc:'Your travel spend qualifies you for Travel Privileges, waived for 6 months.',
+      offerAction:'Activate perk',
+      delivery:{
+        tone:'Brief, factual',
+        channel:'Push, then email',
+        timing:'07:10, day before travel',
+        format:'Summary first, PDF below'
+      }
+    },
+    {
+      id:'vikram', name:'Vikram, 30', tag:'Savings A/c • Salaried', productType: 'savings',
+      insight:'Your monthly salary of ₹85,000 was credited on 01 Sep. You have maintained a balance above ₹1 Lakh for 3 months.',
+      flaggedTxns:['Salary Credit - TechCorp'],
+      flagNote:'Triggered Auto-Sweep eligibility.',
+      offerId:'CATALOG-FD-7',
+      offerTitle:'Activate Auto-Sweep FD',
+      offerDesc:'Earn up to 7.2% p.a. on idle funds above ₹50,000. Instant withdrawal anytime.',
+      offerAction:'Enable Auto-Sweep',
+      delivery:{
+        tone:'Advisory, helpful',
+        channel:'App Push + Netbanking Banner',
+        timing:'10:00 AM (Day after Salary Credit)',
+        format:'Interactive Widget'
+      }
+    },
+    {
+      id:'ananya', name:'Ananya, 34', tag:'Savings A/c • Wealth Builder', productType: 'savings',
+      insight:'Disciplined ₹15,000 SIP active. However, your ₹1,42,500 surplus balance is earning just 2.7% p.a. interest.',
+      flaggedTxns:['Mutual Fund SIP'],
+      flagNote:'Consistent investments trigger high-yield deposit recommendations.',
+      offerId:'CATALOG-RD-72',
+      offerTitle:'Start a 7.2% Recurring Deposit',
+      offerDesc:'Lock your surplus cash into a Guaranteed RD. Zero penalty on premature exit.',
+      offerAction:'Start RD',
+      delivery:{
+        tone:'Strategic, professional',
+        channel:'Email + Netbanking Inbox',
+        timing:'14:30 (Mid-month investment check)',
+        format:'Comparison Table, Printable'
+      }
+    }
+  ];
+
+  /* ------------------------------------------------------------------ *
+   * Rendering
+   * ------------------------------------------------------------------ */
+
+  function esc(s){
+    return String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+  }
+
+  function deliveryHTML(persona, mode){
+    const isP = mode === 'personalized';
+    const d = isP ? persona.delivery : genericDelivery;
+    const cell = (label, value) =>
+      `<div><dt>${esc(label)}</dt><dd>${esc(value)}</dd></div>`;
+      
+    const itBadge = isP ? `<div class="badge-row"><span class="dept-badge dept-it">IT Layer (Sub-50ms Routing)</span></div>` : '';
+
+    return `
+      <div class="delivery ${isP ? 'is-personalized' : ''}">
+        ${itBadge}
+        <p class="delivery-label">
+          <span>Delivery — how it reaches the customer</span>
+          <span class="delivery-state">${isP ? 'AI Selected' : 'one for all'}</span>
+        </p>
+        <dl class="delivery-grid">
+          ${cell('Tone', d.tone)}
+          ${cell('Channel', d.channel)}
+          ${cell('Timing', d.timing)}
+          ${cell('Format', d.format)}
+        </dl>
+      </div>
+    `;
+  }
+
+  function statementHTML(persona, mode){
+    const isP = mode === 'personalized';
+    const isSavings = persona.productType === 'savings';
+    const txns = isSavings ? savingsTxns : ccTxns;
+
+    const mktgBadge = isP ? `<div class="badge-row"><span class="dept-badge dept-mktg">Marketing Envelope (New P&L)</span></div>` : '';
+    const compOfferBadge = isP ? `<div class="badge-row" style="margin-bottom:6px;"><span class="dept-badge dept-comp">Compliance Vetted Catalog</span></div>` : '';
+    const compLedgerBadge = isP ? `<div class="badge-row" style="margin-bottom:8px;"><span class="dept-badge dept-comp">Core Ledger (Locked)</span></div>` : '';
+
+    const rows = txns.map(t => {
+      const flagged = isP && persona.flaggedTxns.indexOf(t.desc) !== -1;
+      const note = flagged ? `<span class="flag-note">${esc(persona.flagNote)}</span>` : '';
+      const amtStr = isSavings ? (t.type === 'credit' ? `+₹${inr(t.amt)}` : `-₹${inr(t.amt)}`) : `₹${inr(t.amt)}`;
+      const amtColor = isSavings && t.type === 'credit' ? 'color:var(--teal-deep);' : '';
+      return `<tr class="${flagged ? 'flagged' : ''}">`
+           + `<td class="desc">${esc(t.desc)}${note}</td>`
+           + `<td>${esc(t.d)}</td>`
+           + `<td style="${amtColor}">${amtStr}</td></tr>`;
+    }).join('');
+
+    const bankHeader = isSavings
+      ? `<div class="statement-meta">Savings A/c •••• 9921<br/>Statement: 01-14 Sep</div>`
+      : `<div class="statement-meta">Card •••• 4471<br/>Statement: Sep cycle</div>`;
+
+    const topAmount = isSavings ? `₹${inr(SAVINGS_BAL)}` : `₹${inr(TOTAL_DUE)}`;
+    const topLabel = isSavings ? `Available Balance · as of 14 Sep` : `Total due · by ${DUE_DATE}`;
+
+    const plainSummary = isSavings
+      ? `<div class="plain-summary">
+           <div><span>Available Balance</span><span>₹${inr(SAVINGS_BAL)}</span></div>
+           <div><span>Total Credits</span><span>₹${inr(TOTAL_CREDITS)}</span></div>
+           <div><span>Total Debits</span><span>₹${inr(TOTAL_DEBITS)}</span></div>
+         </div>`
+      : `<div class="plain-summary">
+           <div><span>Total due</span><span>₹${inr(TOTAL_DUE)}</span></div>
+           <div><span>Minimum due</span><span>₹${inr(MIN_DUE)}</span></div>
+           <div><span>Due date</span><span>${DUE_DATE}</span></div>
+         </div>`;
+
+    const tableFooter = isSavings
+      ? ``
+      : `<tr class="txn-total"><td class="desc">Total</td><td></td><td>₹${inr(TOTAL_DUE)}</td></tr>`;
+
+    return `
+      <div class="statement-shell ${isP ? 'is-personalized' : ''}">
+        <div class="statement-head">
+          <div class="statement-bank">Northbridge Bank</div>
+          ${bankHeader}
+        </div>
+        <div class="dash ${isP ? 'show' : ''}" ${isP ? '' : 'aria-hidden="true"'}>
+          ${mktgBadge}
+          <p class="dash-label">Prepared for ${esc(persona.name)} — ${esc(persona.tag)}</p>
+          <div class="dash-top">
+            <div>
+              <div class="dash-amount">${topAmount}</div>
+              <div class="dash-amount-label">${topLabel}</div>
+            </div>
+          </div>
+          <p class="dash-insight">${esc(persona.insight)}</p>
+          <div class="dash-offer">
+            <div style="flex:1;">
+              ${compOfferBadge}
+              <div class="dash-offer-text">
+                <b>${esc(persona.offerTitle)} <span class="offer-id">[${esc(persona.offerId)}]</span></b>
+                <span>${esc(persona.offerDesc)}</span>
+              </div>
+            </div>
+            <button type="button" class="dash-action">${esc(persona.offerAction)}</button>
+          </div>
+        </div>
+        
+        <div style="padding:16px 20px 20px; background:#ffffff;">
+          ${compLedgerBadge}
+          <p class="mandated-note" style="margin-bottom:16px; border-bottom:1px solid var(--line); padding-bottom:10px;"><span class="seam"></span>Mandated statement content — identical in both views</p>
+          ${plainSummary}
+          <table class="txns">
+            <caption>Transactions, 01–14 Sep</caption>
+            <thead><tr><th scope="col">Description</th><th scope="col">Date</th><th scope="col">Amount</th></tr></thead>
+            <tbody>
+              ${rows}
+              ${tableFooter}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    `;
+  }
+
+  function wireModeSwitch(switchId, onChange){
+    const buttons = Array.from(document.querySelectorAll('#' + switchId + ' button'));
+    buttons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        buttons.forEach(b => b.setAttribute('aria-pressed', String(b === btn)));
+        onChange(btn.dataset.mode);
+      });
+    });
+  }
+
+  /* ---- Hero ---- */
+  let heroMode = 'generic';
+  function renderHero(){
+    const p = personas[0];
+    document.getElementById('hero-delivery').innerHTML = deliveryHTML(p, heroMode);
+    document.getElementById('statement-root').innerHTML = statementHTML(p, heroMode);
+    document.getElementById('hero-status').textContent =
+      heroMode === 'personalized'
+        ? 'Personalized view for ' + p.name + '. Delivery and highlights changed; statement figures unchanged.'
+        : 'Generic view. Standard template for all customers.';
+  }
+  wireModeSwitch('hero-switch', mode => { heroMode = mode; renderHero(); });
+  renderHero();
+
+  /* ---- Main demo ---- */
+  let demoPersona = 0;
+  let demoMode = 'generic';
+
+  function renderPersonaRow(){
+    const row = document.getElementById('persona-row');
+    row.innerHTML = personas.map((p, i) =>
+      `<button type="button" class="persona-btn" data-i="${i}" aria-pressed="${i === demoPersona}">`
+      + `<b>${esc(p.name)}</b> <br><span class="sr-only">— </span><span style="font-size:0.75rem; font-weight:normal; opacity:0.8;">${esc(p.tag)}</span></button>`
+    ).join('');
+    row.querySelectorAll('button').forEach(btn => {
+      btn.addEventListener('click', () => {
+        demoPersona = parseInt(btn.dataset.i, 10);
+        renderPersonaRow();
+        renderDemo();
+      });
+    });
+  }
+
+  function renderDemo(){
+    const p = personas[demoPersona];
+    document.getElementById('demo-delivery').innerHTML = deliveryHTML(p, demoMode);
+    document.getElementById('statement-root-2').innerHTML = statementHTML(p, demoMode);
+    document.getElementById('demo-status').textContent =
+      demoMode === 'personalized'
+        ? 'Personalized view for ' + p.name + ', ' + p.tag + '. Statement figures unchanged.'
+        : 'Generic view for ' + p.name + '. Standard template for all customers.';
+  }
+
+  wireModeSwitch('demo-switch', mode => { demoMode = mode; renderDemo(); });
+  renderPersonaRow();
+  renderDemo();
+
+  /* ---- Journey Orchestration ---- */
+  const journeys = [
+    {
+      id:'j1', title:'New-to-EMI Nudge', state:null,
+      steps:[
+        'Bill alert with EMI insight',
+        'Reminder on Day 3 if unconverted',
+        'Offer expiry notice on Day 7'
+      ]
+    },
+    {
+      id:'j2', title:'Dormant Card Reactivation', state:null,
+      steps:[
+        'Low-usage insight nudge',
+        'Limited-time cashback offer',
+        'Flag for relationship-manager follow-up'
+      ]
+    },
+    {
+      id:'j3', title:'Premium Upgrade Path', state:null,
+      steps:[
+        'Eligibility alert',
+        'Benefit showcase message',
+        'Upgrade call-to-action'
+      ]
+    }
+  ];
+
+  let selectedJourney = null;
+
+  const cardsEl  = document.getElementById('journey-cards');
+  const editorEl = document.getElementById('journey-editor');
+  const footerEl = document.getElementById('journey-footer');
+  const jStatusEl = document.getElementById('journey-status');
+
+  function findJourney(id){ return journeys.find(j => j.id === id); }
+
+  function statusLine(j){
+    if (j.state === 'approved')  return '<span class="jcard-status approved">Approved — scheduled</span>';
+    if (j.state === 'dismissed') return '<span class="jcard-status dismissed">Discarded — select to restore</span>';
+    if (selectedJourney === j.id) return '<span class="jcard-status picked">Selected — editing below</span>';
+    return '';
+  }
+
+  function renderJourneyCards(){
+    cardsEl.innerHTML = journeys.map(j => `
+      <button type="button" class="jcard ${j.state === 'dismissed' ? 'dismissed' : ''}"
+              data-id="${j.id}" aria-pressed="${selectedJourney === j.id}">
+        <span class="jcard-title">${esc(j.title)}</span>
+        ${j.steps.map(s => `<span class="jstep"><span class="dot"></span>${esc(s)}</span>`).join('')}
+        ${statusLine(j)}
+      </button>
+    `).join('');
+
+    cardsEl.querySelectorAll('.jcard').forEach(card => {
+      card.addEventListener('click', () => selectJourney(card.dataset.id));
+    });
+  }
+
+  function selectJourney(id){
+    const j = findJourney(id);
+    if (!j) return;
+    if (j.state === 'dismissed') j.state = null;
+    selectedJourney = id;
+    renderJourneyCards();
+    renderEditor();
+    footerEl.innerHTML = `<span><b>${esc(j.title)}</b> was drafted by AI. Nothing sends until a marketer signs off.</span><span class="dept-badge dept-comp" style="margin:0;">Compliance Auto-Check: Clear</span>`;
+    announce(j.title + ' selected for review.');
+  }
+
+  function announce(msg){ jStatusEl.textContent = msg; }
+
+  function closeEditor(){
+    selectedJourney = null;
+    editorEl.hidden = true;
+    editorEl.innerHTML = '';
+    renderJourneyCards();
+  }
+
+  function renderEditor(focusSelector){
+    const j = findJourney(selectedJourney);
+    if (!j){ closeEditor(); return; }
+
+    const last = j.steps.length - 1;
+    const stepRows = j.steps.map((s, i) => `
+      <li class="jed-step">
+        <span class="jed-num">${String(i + 1).padStart(2, '0')}</span>
+        <input class="jed-input" type="text" value="${esc(s)}" data-i="${i}"
+               aria-label="Step ${i + 1} of ${j.steps.length}" />
+        <span class="jed-ctrls">
+          <button type="button" data-act="up" data-i="${i}" ${i === 0 ? 'disabled' : ''}
+                  aria-label="Move step ${i + 1} up" title="Move up">&uarr;</button>
+          <button type="button" data-act="down" data-i="${i}" ${i === last ? 'disabled' : ''}
+                  aria-label="Move step ${i + 1} down" title="Move down">&darr;</button>
+          <button type="button" data-act="del" data-i="${i}" ${j.steps.length === 1 ? 'disabled' : ''}
+                  aria-label="Remove step ${i + 1}" title="Remove step">&times;</button>
+        </span>
+      </li>
+    `).join('');
+
+    editorEl.innerHTML = `
+      <div class="jed-head">
+        <div>
+          <p class="jed-label">Marketing Review & Sign-off</p>
+          <div class="jed-title">${esc(j.title)}</div>
+        </div>
+        <div class="jed-actions">
+          <button type="button" class="btn-sm" data-act="add">Add step</button>
+          <button type="button" class="btn-sm primary" data-act="approve">Approve &amp; schedule</button>
+          <button type="button" class="btn-sm" data-act="discard">Discard</button>
+        </div>
+      </div>
+      <ol class="jed-steps">${stepRows}</ol>
+      <p class="jed-hint">${j.steps.length} step${j.steps.length === 1 ? '' : 's'} — edit the text, reorder, or remove. AI drafted it; Marketing signs it off.</p>
+    `;
+    editorEl.hidden = false;
+
+    editorEl.querySelectorAll('.jed-input').forEach(input => {
+      input.addEventListener('input', () => {
+        j.steps[parseInt(input.dataset.i, 10)] = input.value;
+      });
+      input.addEventListener('change', renderJourneyCards);
+    });
+
+    editorEl.querySelectorAll('button[data-act]').forEach(btn => {
+      btn.addEventListener('click', () => handleEditorAction(j, btn.dataset.act, btn.dataset.i));
+    });
+
+    if (focusSelector){
+      const target = editorEl.querySelector(focusSelector);
+      if (target) target.focus();
+    }
+  }
+
+  function handleEditorAction(j, act, rawIndex){
+    const i = parseInt(rawIndex, 10);
+
+    if (act === 'up' || act === 'down'){
+      const to = act === 'up' ? i - 1 : i + 1;
+      if (to < 0 || to >= j.steps.length) return;
+      const moved = j.steps[i];
+      j.steps[i] = j.steps[to];
+      j.steps[to] = moved;
+      renderJourneyCards();
+      renderEditor(`button[data-act="${act}"][data-i="${to}"]`);
+      announce('Step moved to position ' + (to + 1) + '.');
+      return;
+    }
+
+    if (act === 'del'){
+      if (j.steps.length === 1) return;
+      const removed = j.steps.splice(i, 1)[0];
+      renderJourneyCards();
+      renderEditor('button[data-act="add"]');
+      announce('Removed step: ' + removed + '.');
+      return;
+    }
+
+    if (act === 'add'){
+      j.steps.push('New step — describe the message');
+      renderJourneyCards();
+      renderEditor(`.jed-input[data-i="${j.steps.length - 1}"]`);
+      const added = editorEl.querySelector(`.jed-input[data-i="${j.steps.length - 1}"]`);
+      if (added) added.select();
+      announce('Step added at position ' + j.steps.length + '.');
+      return;
+    }
+
+    if (act === 'approve'){
+      j.state = 'approved';
+      footerEl.innerHTML = `<span><b>${esc(j.title)}</b> approved by Marketing and scheduled — as edited.</span><span class="dept-badge dept-mktg" style="margin:0;">Marketing P&L</span>`;
+      announce(j.title + ' approved and scheduled.');
+      closeEditor();
+      return;
+    }
+
+    if (act === 'discard'){
+      j.state = 'dismissed';
+      footerEl.innerHTML = `<span><b>${esc(j.title)}</b> discarded by Marketing.</span>`;
+      announce(j.title + ' discarded.');
+      closeEditor();
+      return;
+    }
+  }
+
+  renderJourneyCards();
+</script>
+</body>
+</html>
