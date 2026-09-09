@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -116,126 +117,188 @@
   /* Robust In-Flow Department Tags */
   .dept-badge {
     display: inline-block;
-    font-size: 0.65rem;
+    font-size: 0.6rem;
     font-family: var(--font-mono);
     font-weight: 600;
-    padding: 4px 8px;
+    padding: 3px 6px;
     border-radius: 4px;
     color: #ffffff;
     text-transform: uppercase;
     letter-spacing: 0.04em;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.15);
   }
   .dept-mktg { background: var(--dept-mktg); }
   .dept-comp { background: var(--dept-comp); }
   .dept-it { background: var(--dept-it); }
   .badge-row {
     text-align: right; 
-    margin-bottom: 12px;
+    margin-bottom: 10px;
   }
 
   /* DELIVERY STRIP */
   .delivery{
-    max-width:420px; margin:0 auto 14px; border:1px solid var(--line);
-    background:var(--paper-2); padding:14px 16px 15px;
+    max-width:320px; margin:0 auto 14px; border:1px solid var(--line);
+    background:var(--paper-2); padding:12px 14px; border-radius:8px;
   }
   .delivery-label{
-    margin:0 0 12px; font-size:0.76rem; font-weight:600; color:var(--grey);
+    margin:0 0 10px; font-size:0.72rem; font-weight:600; color:var(--grey);
     display:flex; justify-content:space-between; align-items:baseline; gap:10px;
   }
-  .delivery-state{font-family:var(--font-mono); font-size:0.72rem; color:var(--grey);}
+  .delivery-state{font-family:var(--font-mono); font-size:0.68rem; color:var(--grey);}
   .delivery.is-personalized{background:var(--teal-tint); border-color:var(--teal-deep);}
   .delivery.is-personalized .delivery-label{color:var(--teal-deep);}
   .delivery.is-personalized .delivery-state{color:var(--teal-deep);}
-  .delivery-grid{display:grid; grid-template-columns:1fr 1fr; gap:12px 18px; margin:0;}
+  .delivery-grid{display:grid; grid-template-columns:1fr 1fr; gap:10px 14px; margin:0;}
   .delivery-grid > div{min-width:0;}
-  .delivery-grid dt{font-size:0.7rem; color:var(--grey); margin-bottom:2px;}
-  .delivery-grid dd{margin:0; font-size:0.83rem; font-weight:500; line-height:1.35;}
+  .delivery-grid dt{font-size:0.65rem; color:var(--grey); margin-bottom:2px;}
+  .delivery-grid dd{margin:0; font-size:0.78rem; font-weight:500; line-height:1.35;}
   .delivery.is-personalized .delivery-grid dd{color:var(--teal-deep); font-weight:600;}
 
-  /* STATEMENT MOCKUP */
+  /* IPHONE CHASSIS */
+  .iphone-frame {
+    width: 320px;
+    height: 650px;
+    margin: 0 auto;
+    background: #ffffff;
+    border: 12px solid #111;
+    border-radius: 38px;
+    box-shadow: 0 20px 40px -10px rgba(0,0,0,0.25), inset 0 0 0 2px #333;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+  }
+  .iphone-status {
+    height: 38px;
+    background: #ffffff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px 0 24px;
+    font-size: 0.72rem;
+    font-weight: 600;
+    color: #000;
+    z-index: 10;
+    position: sticky;
+    top: 0;
+  }
+  .dynamic-island {
+    position: absolute;
+    top: 8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90px;
+    height: 24px;
+    background: #000;
+    border-radius: 12px;
+    z-index: 20;
+  }
+  .iphone-screen {
+    flex: 1;
+    overflow-y: auto;
+    background: #ffffff;
+    scrollbar-width: none;
+  }
+  .iphone-screen::-webkit-scrollbar { display: none; }
+  .iphone-home {
+    height: 22px;
+    background: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    padding-bottom: 6px;
+    z-index: 10;
+    position: sticky;
+    bottom: 0;
+  }
+  .home-bar {
+    width: 100px;
+    height: 4px;
+    background: #111;
+    border-radius: 2px;
+  }
+
+  /* STATEMENT MOCKUP (INSIDE IPHONE) */
   .statement-shell{
-    background:var(--white); border:1px solid var(--line);
-    box-shadow:0 18px 40px -22px rgba(16,27,45,0.35);
-    max-width:420px; margin:0 auto; font-size:0.86rem;
+    font-size:0.8rem;
+    padding-bottom: 20px;
   }
   .statement-head{
-    padding:18px 20px 14px; border-bottom:1px solid var(--line);
+    padding:12px 16px; border-bottom:1px solid var(--line);
     display:flex; justify-content:space-between; align-items:flex-start;
   }
-  .statement-bank{font-family:var(--font-serif); font-weight:600; font-size:1.05rem;}
-  .statement-meta{color:var(--grey); font-size:0.78rem; text-align:right; line-height:1.4;}
+  .statement-bank{font-family:var(--font-serif); font-weight:600; font-size:1rem;}
+  .statement-meta{color:var(--grey); font-size:0.72rem; text-align:right; line-height:1.4;}
 
   .dash{
     padding:0; max-height:0; overflow:hidden; opacity:0;
     transition:max-height 0.4s ease, opacity 0.3s ease, padding 0.3s ease;
     background:var(--teal-tint); border-bottom:1px solid var(--line);
   }
-  .dash.show{max-height:650px; opacity:1; padding:18px 20px 20px;}
-  .dash-label{font-size:0.75rem; color:var(--teal-deep); font-weight:600; margin:0 0 10px;}
-  .dash-top{display:flex; justify-content:space-between; align-items:baseline; margin-bottom:14px;}
-  .dash-amount{font-family:var(--font-mono); font-size:1.7rem; font-weight:600; color:var(--ink);}
-  .dash-amount-label{font-size:0.72rem; color:var(--grey);}
+  .dash.show{max-height:650px; opacity:1; padding:16px;}
+  .dash-label{font-size:0.7rem; color:var(--teal-deep); font-weight:600; margin:0 0 10px;}
+  .dash-top{display:flex; justify-content:space-between; align-items:baseline; margin-bottom:12px;}
+  .dash-amount{font-family:var(--font-mono); font-size:1.5rem; font-weight:600; color:var(--ink);}
+  .dash-amount-label{font-size:0.68rem; color:var(--grey);}
   .dash-insight{
-    font-size:0.85rem; color:var(--ink); margin:0 0 14px; padding:10px 12px;
+    font-size:0.78rem; color:var(--ink); margin:0 0 12px; padding:8px 10px;
     background:var(--white); border-left:2px solid var(--teal-deep);
   }
   .dash-offer{
-    display:flex; justify-content:space-between; align-items:center; gap:12px;
-    padding:12px 14px; background:var(--white); border:1px solid var(--teal-deep);
+    display:flex; justify-content:space-between; align-items:center; gap:8px;
+    padding:10px; background:var(--white); border:1px solid var(--teal-deep); border-radius: 4px;
   }
-  .dash-offer-text{font-size:0.82rem;}
-  .dash-offer-text b{display:block; font-size:0.88rem; margin-bottom:2px;}
-  .offer-id {font-family:var(--font-mono); font-size:0.65rem; color:var(--teal-deep); font-weight:400; background:var(--teal-tint); padding:2px 4px; border-radius:2px; margin-left:6px; vertical-align:middle;}
-  .dash-offer-text span{color:var(--grey); font-size:0.78rem;}
+  .dash-offer-text{font-size:0.75rem;}
+  .dash-offer-text b{display:block; font-size:0.82rem; margin-bottom:2px;}
+  .offer-id {font-family:var(--font-mono); font-size:0.6rem; color:var(--teal-deep); font-weight:400; background:var(--teal-tint); padding:2px 4px; border-radius:2px; margin-left:4px; vertical-align:middle;}
+  .dash-offer-text span{color:var(--grey); font-size:0.72rem;}
   .dash-action{
-    font-family:var(--font-sans); font-weight:600; font-size:0.78rem;
-    background:var(--teal-deep); color:var(--white); border:none;
-    padding:9px 13px; white-space:nowrap; cursor:pointer;
+    font-family:var(--font-sans); font-weight:600; font-size:0.72rem;
+    background:var(--teal-deep); color:var(--white); border:none; border-radius: 3px;
+    padding:8px 10px; white-space:nowrap; cursor:pointer;
   }
 
   /* compliance seam */
   .mandated-note{
     display:flex; align-items:center; gap:8px; margin:0;
-    padding:8px 0px; border-bottom:1px solid var(--line);
-    font-size:0.7rem; color:var(--grey); background:transparent;
+    padding:6px 0px; border-bottom:1px solid var(--line);
+    font-size:0.65rem; color:var(--grey); background:transparent;
   }
   .mandated-note .seam{
-    width:14px; height:1px; background:var(--grey); flex-shrink:0;
+    width:10px; height:1px; background:var(--grey); flex-shrink:0;
   }
   .statement-shell.is-personalized .mandated-note{
-    color:var(--teal-deep); border-left:2px solid var(--teal-deep); padding-left:20px;
+    color:var(--teal-deep); border-left:2px solid var(--teal-deep); padding-left:14px;
   }
   .statement-shell.is-personalized .mandated-note .seam{background:var(--teal-deep);}
 
-  .statement-body{padding:16px 20px 20px;}
+  .statement-body{padding:12px 16px;}
   .plain-summary{
-    display:flex; justify-content:space-between; padding:10px 0; border-bottom:1px solid var(--line);
-    font-size:0.86rem; margin-bottom:10px;
+    display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px solid var(--line);
+    font-size:0.78rem; margin-bottom:8px;
   }
   .plain-summary div{display:flex; flex-direction:column;}
-  .plain-summary span:first-child{color:var(--grey); font-size:0.72rem;}
+  .plain-summary span:first-child{color:var(--grey); font-size:0.65rem;}
   .plain-summary span:last-child{font-family:var(--font-mono); font-weight:600;}
 
-  table.txns{width:100%; border-collapse:collapse; font-size:0.8rem;}
+  table.txns{width:100%; border-collapse:collapse; font-size:0.72rem;}
   table.txns caption{
-    caption-side:top; text-align:left; font-size:0.7rem; color:var(--grey); padding-bottom:6px;
+    caption-side:top; text-align:left; font-size:0.65rem; color:var(--grey); padding-bottom:6px;
   }
   table.txns th{
-    text-align:left; font-weight:600; color:var(--grey); font-size:0.68rem;
+    text-align:left; font-weight:600; color:var(--grey); font-size:0.62rem;
     padding:6px 0; border-bottom:1px solid var(--line);
   }
   table.txns th:last-child, table.txns td:last-child{text-align:right;}
-  table.txns td{padding:8px 0; border-bottom:1px solid #eef0ea; font-family:var(--font-mono); vertical-align:top;}
+  table.txns td{padding:6px 0; border-bottom:1px solid #eef0ea; font-family:var(--font-mono); vertical-align:top;}
   table.txns td.desc{font-family:var(--font-sans);}
   table.txns tr.flagged td{background:var(--teal-tint);}
   table.txns tr.flagged td.desc{color:var(--teal-deep); font-weight:600; font-family:var(--font-sans);}
   .flag-note{
-    display:block; font-weight:400; font-size:0.68rem; color:var(--teal-deep);
+    display:block; font-weight:400; font-size:0.6rem; color:var(--teal-deep);
     margin-top:2px; line-height:1.3;
   }
   .txn-total td{
-    border-bottom:none; border-top:1px solid var(--line); font-weight:600; padding-top:9px;
+    border-bottom:none; border-top:1px solid var(--line); font-weight:600; padding-top:8px;
   }
   .txn-total td.desc{color:var(--grey); font-weight:600;}
 
@@ -374,13 +437,15 @@
   .btn-sm:hover{background:var(--paper);}
   .btn-sm.primary{background:var(--teal-deep); border-color:var(--teal-deep); color:var(--white);}
   .btn-sm.primary:hover{background:var(--teal);}
-  .jed-steps{list-style:none; margin:0; padding:0; background:var(--white); border:1px solid var(--line);}
-  .jed-step{
-    display:flex; align-items:center; gap:10px; padding:8px 12px;
-    border-bottom:1px solid var(--line);
-  }
-  .jed-step:last-child{border-bottom:none;}
-  .jed-num{font-family:var(--font-mono); font-size:0.74rem; color:var(--grey); flex-shrink:0; width:20px;}
+  
+  .jed-steps { list-style:none; margin:0; padding: 10px 0 10px 28px; position: relative; }
+  .jed-step { position: relative; display:flex; align-items:center; gap:10px; background: var(--white); border: 1px solid var(--line); margin-bottom: 24px; padding: 10px 14px; border-radius: 4px; box-shadow: 0 4px 6px -4px rgba(0,0,0,0.05); }
+  .jed-step::before { content: ''; position: absolute; left: -16px; top: 28px; bottom: -32px; width: 2px; background: var(--line); }
+  .jed-step:last-child::before { display: none; }
+  .jed-step:last-child { margin-bottom: 0; }
+  .jed-num { position: absolute; left: -26px; top: 50%; transform: translateY(-50%); width: 22px; height: 22px; background: var(--teal-deep); color: var(--white); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: var(--font-mono); font-size: 0.7rem; font-weight: 600; z-index: 2; box-shadow: 0 0 0 4px var(--teal-tint); }
+  .jed-delay { position: absolute; bottom: -20px; left: -26px; background: var(--paper-2); color: var(--grey); font-size: 0.65rem; padding: 2px 8px; border-radius: 10px; font-family: var(--font-mono); border: 1px solid var(--line); z-index: 3; }
+  
   .jed-input{
     flex:1; min-width:0; font-family:var(--font-sans); font-size:0.84rem; color:var(--ink);
     border:1px solid transparent; background:transparent; padding:6px 8px; border-radius:2px;
@@ -493,7 +558,7 @@
     <h2>Same statement. Same data. A different first ten seconds.</h2>
     <div class="demo-grid">
       <div class="demo-copy-block">
-        <p class="section-copy">Pick a customer. Every figure in the statement below is identical across all views for that product line. Notice how the AI toggle reveals the <b>X-Ray Ownership Tags</b>. This proves how Kairos connects departments that rarely collaborate: <b>IT</b> powers the fast delivery engine, <b>Compliance</b> hardcodes the legal numbers and catalog rules, and <b>Marketing</b> optimizes the envelope to drive revenue.</p>
+        <p class="section-copy">Pick a customer. Every figure in the statement below is identical across all views for that product line. Notice how the AI toggle reveals the <b>X-Ray Ownership Tags</b> inside the mobile preview. This proves how Kairos connects departments that rarely collaborate: <b>IT</b> powers the delivery engine, <b>Compliance</b> hardcodes the legal numbers, and <b>Marketing</b> optimizes the envelope to drive revenue.</p>
         <div class="persona-row" id="persona-row" role="group" aria-label="Choose a customer"></div>
         <p class="switch-label" id="demo-switch-label">View</p>
         <div class="mode-switch" id="demo-switch" role="group" aria-labelledby="demo-switch-label">
@@ -512,9 +577,9 @@
 
 <section class="opmodel" id="operating-model">
   <div class="wrap">
-    <p class="section-label">Operating Model & Safeguards</p>
-    <h2>Who owns this channel, and how risks are mitigated.</h2>
-    <p class="section-copy">Personalizing the envelope is the visible part. What makes this a digital transformation rather than a product feature is where the channel sits afterwards: who owns the send, how risks (hallucination, consent, cost) are managed, and how success is measured.</p>
+    <p class="section-label">Operating Model</p>
+    <h2>Who owns this channel, and which line it lands on.</h2>
+    <p class="section-copy">Personalizing the envelope is the visible part. What makes this a digital transformation rather than a product feature is where the channel sits afterwards: who owns the send, how it is funded, and what it is measured on.</p>
     <table class="op-table">
       <thead>
         <tr>
@@ -530,29 +595,24 @@
           <td data-label="With Kairos" class="col-after">Joint. Compliance owns the mandated fields and keeps a veto; Marketing owns the envelope around them.</td>
         </tr>
         <tr>
-          <th scope="row">Risk posture & Hallucinations</th>
-          <td data-label="Today">Risk avoided by never touching the message; 100% manual template coding.</td>
-          <td data-label="With Kairos" class="col-after">Risk managed: The AI matches users to hardcoded, vetted offers from a Product Catalog. It does not write financial terms.</td>
+          <th scope="row">How it is budgeted</th>
+          <td data-label="Today">A compliance cost line, measured on cost per message and delivery SLA.</td>
+          <td data-label="With Kairos" class="col-after">An attributed revenue channel with its own P&amp;L, carried at near-zero acquisition cost.</td>
         </tr>
         <tr>
-          <th scope="row">Consent Validation SLA</th>
-          <td data-label="Today">Manual list scrubbing or reliance on downstream telecom providers.</td>
-          <td data-label="With Kairos" class="col-after">&lt; 50ms via IT in-memory cache; automatically defaults to a generic service-only template on timeout to guarantee core delivery.</td>
+          <th scope="row">What success means</th>
+          <td data-label="Today">Sent, delivered, no complaint raised.</td>
+          <td data-label="With Kairos" class="col-after">Delivery SLA held <em>and</em> next-best-action uptake, cross-sell conversion, and trust measured per cycle.</td>
         </tr>
         <tr>
-          <th scope="row">Message Routing</th>
-          <td data-label="Today">All communications queue through a single monolithic transactional gateway.</td>
-          <td data-label="With Kairos" class="col-after">Synchronous alerts (OTPs) bypass AI completely; only asynchronous batch alerts (statements) route through the AI envelope layer.</td>
+          <th scope="row">Speed of change</th>
+          <td data-label="Today">Any template change queues behind a release cycle.</td>
+          <td data-label="With Kairos" class="col-after">The envelope adapts per customer, per cycle. The mandated layer stays version-controlled and auditable.</td>
         </tr>
         <tr>
-          <th scope="row">Cost of Inference (ROI)</th>
-          <td data-label="Today">Fixed SaaS license cost based purely on send volume.</td>
-          <td data-label="With Kairos" class="col-after">Tiered inference: Real-time LLM for high-value segments, while lower tiers receive cached, pre-generated batch templates to ensure API costs never exceed revenue uplift.</td>
-        </tr>
-        <tr>
-          <th scope="row">Attribution & Learning</th>
-          <td data-label="Today">Sent, delivered, no complaint raised. No feedback loop.</td>
-          <td data-label="With Kairos" class="col-after">Closed-loop learning tracks channel/timing misses to adjust next cycle. Conversions tracked via Kairos-specific UTMs/promo codes to isolate exact revenue uplift.</td>
+          <th scope="row">Risk posture</th>
+          <td data-label="Today">Risk avoided by never touching the message.</td>
+          <td data-label="With Kairos" class="col-after">Risk managed: consent and eligibility checks before send, model governance, and an audit trail on every variant.</td>
         </tr>
       </tbody>
     </table>
@@ -596,21 +656,14 @@
         <div class="rm-num">02</div>
         <div>
           <div class="rm-title">Expand alerts + journey orchestration assist</div>
-          <div class="rm-desc">Extend personalization to EMI reminders, KYC alerts, and renewal notices, and introduce AI-suggested journeys into the CRM for marketers to select and refine. Ownership of the envelope moves to a joint Marketing–Compliance model, with sub-50ms IT consent checks in the send path.</div>
+          <div class="rm-desc">Extend personalization to EMI reminders, KYC alerts, and renewal notices, and introduce AI-suggested journeys into the CRM for marketers to select and refine. Ownership of the envelope moves to a joint Marketing–Compliance model, with model governance and consent checks in the send path.</div>
         </div>
       </div>
       <div class="rm-item">
         <div class="rm-num">03</div>
         <div>
-          <div class="rm-title">Tiered Inference & Feedback Loop</div>
-          <div class="rm-desc">Implement the closed-loop Engagement Optimization engine. If a customer ignores a push notification, the AI learns to shift the delivery time or channel for their next billing cycle. Transition to Tiered Inference (caching templates for lower-value segments) to aggressively protect API cost margins.</div>
-        </div>
-      </div>
-      <div class="rm-item">
-        <div class="rm-num">04</div>
-        <div>
           <div class="rm-title">Full attribution &amp; channel reclassification</div>
-          <div class="rm-desc">Introduce Kairos-exclusive UTM parameters and promo codes to definitively measure cross-sell conversion and trust impact end-to-end. Mandatory communications move off the compliance cost line and onto an attributed revenue channel carrying its own P&amp;L — the point at which this stops being a feature and becomes an operating-model change.</div>
+          <div class="rm-desc">Measure cross-sell conversion and trust impact end-to-end and extend the same engine across SMS, app, and email. Mandatory communications move off the compliance cost line and onto an attributed revenue channel carrying its own P&amp;L — the point at which this stops being a feature and becomes an operating-model change.</div>
         </div>
       </div>
     </div>
@@ -763,7 +816,7 @@
       <div class="delivery ${isP ? 'is-personalized' : ''}">
         ${itBadge}
         <p class="delivery-label">
-          <span>Delivery — how it reaches the customer</span>
+          <span>Delivery parameters</span>
           <span class="delivery-state">${isP ? 'AI Selected' : 'one for all'}</span>
         </p>
         <dl class="delivery-grid">
@@ -820,45 +873,63 @@
       : `<tr class="txn-total"><td class="desc">Total</td><td></td><td>₹${inr(TOTAL_DUE)}</td></tr>`;
 
     return `
-      <div class="statement-shell ${isP ? 'is-personalized' : ''}">
-        <div class="statement-head">
-          <div class="statement-bank">Northbridge Bank</div>
-          ${bankHeader}
+      <div class="iphone-frame">
+        <div class="iphone-status">
+          <span>9:41</span>
+          <div class="dynamic-island"></div>
+          <span style="display:flex; gap:4px; align-items:center;">
+             <svg width="14" height="10" viewBox="0 0 14 10" fill="currentColor"><path d="M1 8h2v2H1zm3-2h2v4H4zm3-2h2v6H7zm3-2h2v8h-2z"/></svg>
+             <svg width="16" height="10" viewBox="0 0 16 10" fill="currentColor"><rect x="1" y="1" width="12" height="8" rx="2" stroke="currentColor" stroke-width="1" fill="none"/><path d="M14 4h1v2h-1z"/></svg>
+          </span>
         </div>
-        <div class="dash ${isP ? 'show' : ''}" ${isP ? '' : 'aria-hidden="true"'}>
-          ${mktgBadge}
-          <p class="dash-label">Prepared for ${esc(persona.name)} — ${esc(persona.tag)}</p>
-          <div class="dash-top">
-            <div>
-              <div class="dash-amount">${topAmount}</div>
-              <div class="dash-amount-label">${topLabel}</div>
+        
+        <div class="iphone-screen">
+          <div class="statement-shell ${isP ? 'is-personalized' : ''}">
+            <div class="statement-head">
+              <div class="statement-bank">Northbridge Bank</div>
+              ${bankHeader}
             </div>
-          </div>
-          <p class="dash-insight">${esc(persona.insight)}</p>
-          <div class="dash-offer">
-            <div style="flex:1;">
-              ${compOfferBadge}
-              <div class="dash-offer-text">
-                <b>${esc(persona.offerTitle)} <span class="offer-id">[${esc(persona.offerId)}]</span></b>
-                <span>${esc(persona.offerDesc)}</span>
+            
+            <div class="dash ${isP ? 'show' : ''}" ${isP ? '' : 'aria-hidden="true"'}>
+              ${mktgBadge}
+              <p class="dash-label">Prepared for ${esc(persona.name)}</p>
+              <div class="dash-top">
+                <div>
+                  <div class="dash-amount">${topAmount}</div>
+                  <div class="dash-amount-label">${topLabel}</div>
+                </div>
+              </div>
+              <p class="dash-insight">${esc(persona.insight)}</p>
+              <div class="dash-offer">
+                <div style="flex:1;">
+                  ${compOfferBadge}
+                  <div class="dash-offer-text">
+                    <b>${esc(persona.offerTitle)} <span class="offer-id">[${esc(persona.offerId)}]</span></b>
+                    <span>${esc(persona.offerDesc)}</span>
+                  </div>
+                </div>
+                <button type="button" class="dash-action">${esc(persona.offerAction)}</button>
               </div>
             </div>
-            <button type="button" class="dash-action">${esc(persona.offerAction)}</button>
+            
+            <div class="statement-body">
+              ${compLedgerBadge}
+              <p class="mandated-note" style="margin-bottom:12px; border-bottom:1px solid var(--line); padding-bottom:8px;"><span class="seam"></span>Mandated content — identical in both views</p>
+              ${plainSummary}
+              <table class="txns">
+                <caption>Transactions, 01–14 Sep</caption>
+                <thead><tr><th scope="col">Description</th><th scope="col">Date</th><th scope="col">Amount</th></tr></thead>
+                <tbody>
+                  ${rows}
+                  ${tableFooter}
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
         
-        <div style="padding:16px 20px 20px; background:#ffffff;">
-          ${compLedgerBadge}
-          <p class="mandated-note" style="margin-bottom:16px; border-bottom:1px solid var(--line); padding-bottom:10px;"><span class="seam"></span>Mandated statement content — identical in both views</p>
-          ${plainSummary}
-          <table class="txns">
-            <caption>Transactions, 01–14 Sep</caption>
-            <thead><tr><th scope="col">Description</th><th scope="col">Date</th><th scope="col">Amount</th></tr></thead>
-            <tbody>
-              ${rows}
-              ${tableFooter}
-            </tbody>
-          </table>
+        <div class="iphone-home">
+          <div class="home-bar"></div>
         </div>
       </div>
     `;
@@ -926,25 +997,25 @@
     {
       id:'j1', title:'New-to-EMI Nudge', state:null,
       steps:[
-        'Bill alert with EMI insight',
-        'Reminder on Day 3 if unconverted',
-        'Offer expiry notice on Day 7'
+        '[WhatsApp] Bill alert with EMI insight',
+        '[SMS] Reminder on Day 3 if unconverted',
+        '[Push] Offer expiry notice on Day 7'
       ]
     },
     {
       id:'j2', title:'Dormant Card Reactivation', state:null,
       steps:[
-        'Low-usage insight nudge',
-        'Limited-time cashback offer',
-        'Flag for relationship-manager follow-up'
+        '[Email] Low-usage insight nudge',
+        '[WhatsApp] Limited-time cashback offer',
+        '[CRM] Flag for relationship-manager follow-up'
       ]
     },
     {
       id:'j3', title:'Premium Upgrade Path', state:null,
       steps:[
-        'Eligibility alert',
-        'Benefit showcase message',
-        'Upgrade call-to-action'
+        '[App Banner] Eligibility alert',
+        '[Email] Benefit showcase message',
+        '[Push] Upgrade call-to-action'
       ]
     }
   ];
@@ -1007,7 +1078,8 @@
     const last = j.steps.length - 1;
     const stepRows = j.steps.map((s, i) => `
       <li class="jed-step">
-        <span class="jed-num">${String(i + 1).padStart(2, '0')}</span>
+        ${i < last ? '<div class="jed-delay">time delay</div>' : ''}
+        <span class="jed-num">${i + 1}</span>
         <input class="jed-input" type="text" value="${esc(s)}" data-i="${i}"
                aria-label="Step ${i + 1} of ${j.steps.length}" />
         <span class="jed-ctrls">
